@@ -14,6 +14,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { AppRoutes } from './src/routes/app.routes';
 import theme from './src/global/styles/theme';
 import { LanguageProvider } from './src/context/language';
+import { SafeAreaView } from 'react-native';
 
 export default function App() {
 	const [fontsLoaded] = useFonts({
@@ -34,6 +35,7 @@ export default function App() {
 					<AppRoutes />
 				</NavigationContainer>
 			</LanguageProvider>
+			<SafeAreaView style={{ backgroundColor: theme.colors.shape }} />
 		</ThemeProvider>
 	);
 }

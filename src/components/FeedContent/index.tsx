@@ -1,4 +1,9 @@
 import React, { useState } from 'react';
+import { TouchableOpacity, Share as ReactShare } from 'react-native';
+
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../routes/stack.routes';
 
 import {
 	Container,
@@ -7,7 +12,8 @@ import {
 	Carousel,
 	Image,
 	Div,
-	Love,
+	Favorite,
+	FavoriteSelected,
 	Share,
 	CameraIcon,
 	Name,
@@ -22,19 +28,65 @@ interface Props {
 }
 
 export function FeedContent({ title, info, pics, name }: Props) {
+	const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+	const [isFavorite, setIsFavorite] = useState(false);
+
+	function handleSetIsFaforite(): void {
+		setIsFavorite(!isFavorite);
+	}
+
+	async function handleShareContent(): Promise<void> {
+		try {
+			await ReactShare.share(
+				{
+					message: `${title} \nby ${name}`,
+					url: pics[0],
+				},
+				{
+					dialogTitle: info,
+				}
+			);
+		} catch (error) {
+			alert(error.message);
+		}
+	}
+
+	function handleNavigateAlbum(): void {
+		navigation.navigate('Album', {
+			info,
+			title,
+			name,
+			pics,
+		});
+	}
+
 	return (
 		<Container>
-			<Title>{title}</Title>
-			<Info>{info}</Info>
+			<TouchableOpacity onPress={handleNavigateAlbum}>
+				<Title>{title}</Title>
+				<Info>{info}</Info>
+			</TouchableOpacity>
+
 			<Carousel>
 				{pics.map((item, index) => {
-					return <Image key={index.toString()} source={{ uri: item }} />;
+					return (
+						<TouchableOpacity
+							key={index.toString()}
+							onPress={handleNavigateAlbum}
+						>
+							<Image source={{ uri: item }} />
+						</TouchableOpacity>
+					);
 				})}
 			</Carousel>
 			<Div>
 				<Div>
-					<Love />
-					<Share />
+					<TouchableOpacity onPress={handleSetIsFaforite}>
+						{isFavorite ? <FavoriteSelected /> : <Favorite />}
+					</TouchableOpacity>
+					<TouchableOpacity onPress={handleShareContent}>
+						<Share />
+					</TouchableOpacity>
 				</Div>
 
 				<Div>

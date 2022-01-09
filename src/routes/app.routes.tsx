@@ -4,12 +4,16 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useTheme } from 'styled-components';
 
+import { useLanguage } from '../context/language';
+
 import { Generic } from '../screens/Generic';
-import { Feed } from '../screens/Feed';
+import { Profile } from '../screens/Profile';
+import { FeedStackNavigator } from './stack.routes';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
 export function AppRoutes() {
+	const { dictionary } = useLanguage();
 	const theme = useTheme();
 
 	return (
@@ -28,8 +32,8 @@ export function AppRoutes() {
 			}}
 		>
 			<Screen
-				name="Feed"
-				component={Feed}
+				name={dictionary.TAB.HOME}
+				component={FeedStackNavigator}
 				options={{
 					tabBarIcon: ({ size, color, focused }) => (
 						<MaterialCommunityIcons
@@ -41,7 +45,7 @@ export function AppRoutes() {
 				}}
 			/>
 			<Screen
-				name="Explorar"
+				name={dictionary.TAB.EXPLORE}
 				component={Generic}
 				options={{
 					tabBarIcon: ({ size, color, focused }) => (
@@ -54,7 +58,7 @@ export function AppRoutes() {
 				}}
 			/>
 			<Screen
-				name="Checkin"
+				name={dictionary.TAB.CHECKIN}
 				component={Generic}
 				options={{
 					tabBarIcon: ({ size, color, focused }) => (
@@ -67,7 +71,7 @@ export function AppRoutes() {
 				}}
 			/>
 			<Screen
-				name="Notificação"
+				name={dictionary.TAB.NOTIFICATION}
 				component={Generic}
 				options={{
 					tabBarIcon: ({ size, color, focused }) => (
@@ -80,8 +84,8 @@ export function AppRoutes() {
 				}}
 			/>
 			<Screen
-				name="Perfil"
-				component={Generic}
+				name={dictionary.TAB.ACCOUNT}
+				component={Profile}
 				options={{
 					tabBarIcon: ({ size, color, focused }) => (
 						<MaterialCommunityIcons

@@ -36,7 +36,7 @@ export const Carousel = styled.ScrollView.attrs({
 	showsHorizontalScrollIndicator: false,
 	pagingEnabled: true,
 	decelerationRate: 0,
-	snapToInterval: width + 16 - 50,
+	snapToInterval: width - 50 + 8,
 	snapToAlignment: 'center',
 	contentContainerStyle: { paddingHorizontal: 16, paddingVertical: -12 },
 })`
@@ -45,7 +45,7 @@ export const Carousel = styled.ScrollView.attrs({
 
 export const Image = styled.Image`
 	width: ${width - 50}px;
-	height: ${RFValue(180)}px;
+	height: ${width * 0.5}px;
 
 	border-radius: 8px;
 	margin-right: 12px;
@@ -57,11 +57,19 @@ export const Div = styled.View`
 	justify-content: space-between;
 `;
 
-export const Love = styled(AntDesign).attrs({
+export const Favorite = styled(AntDesign).attrs({
 	name: 'hearto',
 })`
 	font-size: ${RFValue(18)}px;
 	color: ${({ theme }) => theme.colors.text_dark};
+	margin-right: 16px;
+`;
+
+export const FavoriteSelected = styled(AntDesign).attrs({
+	name: 'heart',
+})`
+	font-size: ${RFValue(18)}px;
+	color: ${({ theme }) => theme.colors.warn};
 	margin-right: 16px;
 `;
 

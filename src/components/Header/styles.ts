@@ -20,13 +20,31 @@ export const SurfMappers = styled.Image`
 	width: ${RFValue(134)}px;
 `;
 
+export const BackButton = styled.TouchableOpacity`
+	flex-direction: row;
+	align-items: flex-end;
+`;
+
+export const BackIcon = styled(MaterialCommunityIcons).attrs({
+	name: 'chevron-left',
+})`
+	font-size: ${RFValue(34)}px;
+	color: ${({ theme }) => theme.colors.title};
+`;
+
+export const Title = styled.Text`
+	font-size: ${RFValue(18)}px;
+	font-family: ${({ theme }) => theme.fonts.bold};
+	color: ${({ theme }) => theme.colors.title};
+`;
+
 export const IconContent = styled.View`
 	flex-direction: row;
 	align-items: center;
 `;
 
 export const Icon = styled(MaterialCommunityIcons)`
-	font-size: ${RFValue(26)}px;
+	font-size: ${RFValue(24)}px;
 	color: ${({ theme }) => theme.colors.text_dark};
 	margin-left: 16px;
 `;

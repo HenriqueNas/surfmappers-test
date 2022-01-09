@@ -26,7 +26,7 @@ export function Feed() {
 
 	return (
 		<Container>
-			<Header />
+			<Header isFeed />
 
 			<Content>
 				<StoriesCarousel

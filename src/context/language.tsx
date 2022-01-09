@@ -8,7 +8,7 @@ interface Context {
 	dictionary: Language;
 }
 export const LanguageContext = createContext<Context>({} as Context);
-export type AvailableLanguages = 'pt-BR' | 'en-US';
+export type AvailableLanguages = 'pt-BR' | 'en-US' | 'fr-FR';
 
 export const LanguageProvider: React.FC = ({ children }) => {
 	const [language, setLanguage] = useState<AvailableLanguages>('pt-BR');

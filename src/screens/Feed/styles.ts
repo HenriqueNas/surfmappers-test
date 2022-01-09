@@ -12,7 +12,7 @@ export const Container = styled.View`
 export const Content = styled.ScrollView.attrs({
 	showsVerticalScrollIndicator: false,
 })`
-	margin-bottom: 100px;
+	margin-bottom: 90px;
 `;
 
 export const StoriesCarousel = styled(
@@ -33,7 +33,7 @@ export const StoriesCarousel = styled(
 	padding-bottom: 16px;
 
 	border-bottom-color: ${({ theme }) => theme.colors.text_light};
-	border-bottom-width: 0.3px;
+	border-bottom-width: 1px;
 	background: ${({ theme }) => theme.colors.background};
 `;
 

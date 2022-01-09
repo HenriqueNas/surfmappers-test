@@ -1,23 +1,48 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 
-import { Container, SurfMappers, IconContent, Icon } from './styles';
+import { useNavigation } from '@react-navigation/native';
 
-export function Header() {
+import {
+	Container,
+	SurfMappers,
+	BackButton,
+	Title,
+	IconContent,
+	Icon,
+	BackIcon,
+} from './styles';
+
+interface Props {
+	isFeed: boolean;
+	name?: string;
+}
+
+export function Header({ isFeed, name }: Props) {
+	const navigation = useNavigation();
+
+	function handleNavigationBack(): void {
+		navigation.goBack();
+	}
+
 	return (
 		<Container>
-			<SurfMappers
-				source={{
-					uri: 'https://surfmappers.com/static/images/surfmappers_logo_ss.png',
-				}}
-			/>
+			{isFeed ? (
+				<SurfMappers
+					source={{
+						uri: 'https://surfmappers.com/static/images/surfmappers_logo_ss.png',
+					}}
+				/>
+			) : (
+				<BackButton onPress={handleNavigationBack}>
+					<BackIcon />
+					<Title>{name}</Title>
+				</BackButton>
+			)}
 			<IconContent>
-				<TouchableOpacity>
-					<Icon name="cart-outline" />
-				</TouchableOpacity>
-				<TouchableOpacity>
-					<Icon name="forum-outline" />
-				</TouchableOpacity>
+				<Icon name="cart-outline" />
+				<Icon name="forum-outline" />
+				{!isFeed && <Icon name="dots-vertical" />}
 			</IconContent>
 		</Container>
 	);
