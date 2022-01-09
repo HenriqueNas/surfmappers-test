@@ -9,7 +9,15 @@ import { InfoContent } from './Components/InfoContent';
 import { ProfileContent } from './Components/ProfileContent';
 import { PicturesInfoContent } from './Components/PicturesInfoContent';
 
-import { Container } from './styles';
+import {
+	Container,
+	PictureGrid,
+	TimeRange,
+	Picture,
+	ScrollContent,
+	Badge,
+	AlbumIcon,
+} from './styles';
 
 type ProfileScreenRouteProp = RouteProp<RootStackParamList, 'Album'>;
 
@@ -17,17 +25,34 @@ export function Album() {
 	const route = useRoute<ProfileScreenRouteProp>();
 	const { title, info, name, pics } = route.params;
 
-	const { dictionary } = useLanguage();
+	const { dictionary, language } = useLanguage();
 
 	return (
 		<Container>
 			<Header isFeed={false} name={dictionary.ALBUM.ALBUM} />
 
-			<InfoContent title={title} info={info} />
+			<ScrollContent>
+				<InfoContent title={title} info={info[language]} />
 
-			<ProfileContent name={name} />
+				<ProfileContent name={name} />
 
-			<PicturesInfoContent pics={pics} />
+				<PicturesInfoContent pics={pics} />
+
+				<TimeRange>6h - 7h</TimeRange>
+				<PictureGrid
+					data={pics}
+					keyExtractor={(_, index) => index.toString()}
+					renderItem={({ item }) => {
+						return (
+							<Picture source={{ uri: item }}>
+								<Badge>
+									<AlbumIcon />
+								</Badge>
+							</Picture>
+						);
+					}}
+				/>
+			</ScrollContent>
 		</Container>
 	);
 }

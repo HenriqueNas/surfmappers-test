@@ -25,7 +25,11 @@ export type RootStackParamList = {
 	Feed: undefined;
 	Album: {
 		title: string;
-		info: string;
+		info: {
+			'pt-BR': string;
+			'en-US': string;
+			'fr-FR': string;
+		};
 		name: string;
 		pics: string[];
 	};

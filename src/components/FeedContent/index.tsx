@@ -5,6 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../routes/stack.routes';
 
+import { useLanguage } from '../../context/language';
+
 import {
 	Container,
 	Title,
@@ -22,12 +24,17 @@ import {
 
 interface Props {
 	title: string;
-	info: string;
+	info: {
+		'pt-BR': string;
+		'en-US': string;
+		'fr-FR': string;
+	};
 	pics: string[];
 	name: string;
 }
 
 export function FeedContent({ title, info, pics, name }: Props) {
+	const { language } = useLanguage();
 	const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 	const [isFavorite, setIsFavorite] = useState(false);
 
@@ -43,7 +50,7 @@ export function FeedContent({ title, info, pics, name }: Props) {
 					url: pics[0],
 				},
 				{
-					dialogTitle: info,
+					dialogTitle: title,
 				}
 			);
 		} catch (error) {
@@ -64,7 +71,7 @@ export function FeedContent({ title, info, pics, name }: Props) {
 		<Container>
 			<TouchableOpacity onPress={handleNavigateAlbum}>
 				<Title>{title}</Title>
-				<Info>{info}</Info>
+				<Info>{info[language]}</Info>
 			</TouchableOpacity>
 
 			<Carousel>
